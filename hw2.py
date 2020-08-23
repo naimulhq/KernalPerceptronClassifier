@@ -35,7 +35,17 @@ def dot_kf(u, v):
         u*v
     """
     # TODO: implement the kernel function
-    return
+    # Example: Given [x1 x2 x3] and [y1 y2 y3], the dot product will be x1y1 + x2y2 + x3y3. Lists must be same length
+
+    dotProductValue = 0 # This will hold the dot product result
+    if(len(u) != len(v)): # If both lists are not of same length, can not compute dot product. Output error message
+        print("Error: Lengths of List don't match")
+        return -1
+    else:
+        for i in range(len(u)): # For the length of any list. In this case, u
+            dotProductValue += u[i]*v[i] # Take the sum of the products of u and v element wise
+
+    return dotProductValue
 
 def poly_kernel(d):
     """
