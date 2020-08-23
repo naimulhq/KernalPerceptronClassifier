@@ -60,7 +60,8 @@ def poly_kernel(d):
     """
     def kf(u, v):
         # TODO: implement the kernel function
-        return 
+        # Get dot product and add by 1, then square by argument.
+        return (dot_kf(u,v) + 1) ** d
     return kf
 
 def exp_kernel(s):
