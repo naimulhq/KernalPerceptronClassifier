@@ -77,7 +77,17 @@ def exp_kernel(s):
     """
     def kf(u, v):
         # TODO: implement the kernel function
-        return
+        subtractedList = [] # List will hold values once subtraction of two lists take place
+        subtractedMagnitude = 0 # Represents the magnitude of the subtracted list
+        # Obtains the subtracted list
+        for i in range(len(u)):
+            subtractedList.append(u[i] - v[i])
+
+        # Obtains the magnitude
+        for i in range(len(subtractedList)):
+            subtractedMagnitude += subtractedList[i] ** 2
+        
+        return (-1*subtractedMagnitude)/(2*(s**2))
     return kf
 
 class Perceptron:
@@ -94,8 +104,8 @@ class Perceptron:
 
     def train(self, data):
         # TODO: Main function - train the perceptron with data
-        
 
+ 
     def update(self, point, label):
         """
         Updates the parameters of the perceptron, given a point and a label.
@@ -128,4 +138,3 @@ class Perceptron:
 
 # Feel free to add any helper functions as needed.
 if __name__ == '__main__':
-    
