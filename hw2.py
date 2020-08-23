@@ -11,9 +11,16 @@ class Data:
         self.labels = []	# list of strings (lenght: number_of_examples)
 
 def read_data(path):
-    data = Data()
     # TODO: function that will read the input file and store it in the data structure
     # use the Data class defined above to store the information
+    data = Data()
+    f = open(path, "r") # open function opens text file
+    lines = f.readlines() # reads all lines in file and stores as list of strings
+    f.close() # close file
+    for line in lines:
+        data.features.append(line.split(",", 4)[:4]) # Gets the numerical values / features
+        labelLine = str(line.split(",",4)[4]) # Get the label from same line
+        data.labels.append(labelLine.strip()) # Remove trailing newline and add label to list
     return data
 
 def dot_kf(u, v):
