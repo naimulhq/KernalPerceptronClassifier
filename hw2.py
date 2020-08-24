@@ -105,7 +105,8 @@ class Perceptron:
     def train(self, data):
         # TODO: Main function - train the perceptron with data
 
- 
+        return
+
     def update(self, point, label):
         """
         Updates the parameters of the perceptron, given a point and a label.
@@ -133,8 +134,14 @@ class Perceptron:
         # TODO: given data and a perceptron - return a list of integers (+1 or -1).
         # +1 means it is Iris Setosa
         # -1 means it is not Iris Setosa
+
+        predictions = [] # Create an empty list.
+        for i in range(len(data)): # Iterate through data and obtain prediction. Store in list and return once process is finished
+            predictions.append(predict(data))
+            
+
         return predictions
 
 
 # Feel free to add any helper functions as needed.
-if __name__ == '__main__':
+#if __name__ == '__main__':
