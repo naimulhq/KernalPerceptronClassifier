@@ -1,2 +1,2 @@
 # Kernal Perceptron Classifier
-This project will be used to classify a specific species of Iris Flower using continous attributes provided in the testing data.
+In this project, we will be using a Kernal Perceptron Classifier to classify species of Iris flowers. We are given training data which consists of four different attributes: sepal length, sepal width, petal length, and petal width, and the labels indicating the specific species of Iris flower. We will be working with three different species of Iris Flowers: Iris Setosa, Iris Versicolor, and Iris Virginica. By using the training data, we are tasked with training our perceptron to distingusih Iris Setosa from the other two different species with great accuracy.
