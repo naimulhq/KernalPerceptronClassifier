@@ -145,3 +145,11 @@ class Perceptron:
 
 # Feel free to add any helper functions as needed.
 #if __name__ == '__main__':
+def accuracyTest(testingLabels, predictionValues):
+    correct = 0 # Holds total correct
+    for i in range(len(testingLabels)): # Iterate through labels and predictionValueList
+        if((testingLabels[i] == "Iris-setosa") and (predictionValues[i] == 1)):
+            correct += 1 # If the label was Iris-setosa and prediction was 1, it is correct
+        elif(((testingLabels[i] == "Iris-virginia") or ((testingLabels[i] == "Iris-versicolor"))) and (predictionValues[i] == -1)):
+            correct += 1 # If label is any other species and prediction is -1, it is also correct
+    return str((correct/len(testingLabels)) * 100) + "%"
