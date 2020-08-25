@@ -87,7 +87,7 @@ def exp_kernel(s):
         for i in range(len(subtractedList)):
             subtractedMagnitude += subtractedList[i] ** 2
         
-        return (-1*subtractedMagnitude)/(2*(s**2))
+        return math.exp((-1*subtractedMagnitude)/(2*(s**2)))
     return kf
 
 class Perceptron:
@@ -153,3 +153,11 @@ def accuracyTest(testingLabels, predictionValues):
         elif(((testingLabels[i] == "Iris-virginia") or ((testingLabels[i] == "Iris-versicolor"))) and (predictionValues[i] == -1)):
             correct += 1 # If label is any other species and prediction is -1, it is also correct
     return str((correct/len(testingLabels)) * 100) + "%"
+
+
+#u = [1, 2, 3]
+#v = [4, 5, 6]
+#print(dot_kf(u, v))
+#print(poly_kernel(5)(u,v))
+#print(exp_kernel(5)(u,v))
+
