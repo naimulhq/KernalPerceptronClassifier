@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 import math
 import numpy as np
 from time import time
@@ -43,7 +42,7 @@ def dot_kf(u, v):
         return -1
     else:
         for i in range(len(u)): # For the length of any list. In this case, u
-            dotProductValue += u[i]*v[i] # Take the sum of the products of u and v element wise
+            dotProductValue += float(u[i])*float(v[i]) # Take the sum of the products of u and v element wise
 
     return dotProductValue
 
@@ -87,6 +86,8 @@ def exp_kernel(s):
         for i in range(len(subtractedList)):
             subtractedMagnitude += subtractedList[i] ** 2
         
+        
+
         return math.exp((-1*subtractedMagnitude)/(2*(s**2)))
     return kf
 
@@ -104,8 +105,23 @@ class Perceptron:
 
     def train(self, data):
         # TODO: Main function - train the perceptron with data
-
-        return
+        myLabels = []
+        # For loop converts labels to numerical values
+        for i in range(len(data.labels)):
+            if(data.labels[i] == "Iris-setosa"):
+                myLabels.append(1)
+            else:
+                myLabels.append(-1)
+        #  While loops runs until converged = True
+        converged = False
+        while(converged == False):
+            converged = True # If converged remains true, loop will exit
+            for i in range(len(data.features)):
+                trainPrediction = self.calculatePrediction(data.features[i])
+                if(self.update(trainPrediction, myLabels[i]) == True):
+                    self.MissedLabels.append(myLabels[i])
+                    self.MissedPoints.append(data.features[i])
+        return self.MissedLabels, self.MissedPoints
 
     def update(self, point, label):
         """
@@ -119,7 +135,12 @@ class Perceptron:
             True if there is an update (prediction is wrong),
             False otherwise (prediction is accurate).
         """
-        # TODO
+        # TODO 
+        if(point * label <= 0):
+            is_mistake = True
+        else:
+            is_mistake = False
+        
         return is_mistake
 
     def predict(self, point):
@@ -138,9 +159,18 @@ class Perceptron:
         predictions = [] # Create an empty list.
         for i in range(len(data)): # Iterate through data and obtain prediction. Store in list and return once process is finished
             predictions.append(predict(data))
-            
-
         return predictions
+
+    def calculatePrediction(self,point):
+        if not self.MissedPoints:
+            trainPrediction = 0
+        else:
+            trainPrediction = 0
+            for i in range(len(self.MissedLabels)):
+                trainPrediction += self.MissedLabels[i] * self.kf(point,self.MissedPoints[i])
+        
+        trainPrediction = np.sign(trainPrediction)
+        return trainPrediction
 
 
 # Feel free to add any helper functions as needed.
@@ -154,10 +184,15 @@ def accuracyTest(testingLabels, predictionValues):
             correct += 1 # If label is any other species and prediction is -1, it is also correct
     return str((correct/len(testingLabels)) * 100) + "%"
 
+# Obtain training data.
+trainData = Data()
+trainData = read_data("hw2_train.txt")
+# Convert data to homogenous coordinates
+for i in trainData.features:
+    i.append(1)
+# Send data to train
+myPerceptron = Perceptron(dot_kf, 0.2)
+myMissedLabels, myMissedPoints = myPerceptron.train(trainData)
+print(myMissedLabels, myMissedPoints)
 
-#u = [1, 2, 3]
-#v = [4, 5, 6]
-#print(dot_kf(u, v))
-#print(poly_kernel(5)(u,v))
-#print(exp_kernel(5)(u,v))
 
